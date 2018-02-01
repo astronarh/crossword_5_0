@@ -3,14 +3,14 @@
   Created by IntelliJ IDEA.
   User: ShkerdinVA
   Date: 24.01.2018
-  Time: 15:40
+  Time: 17:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Index</title>
-    <link href="<c:url value="/resources/static/css/index.css" />" rel="stylesheet">
+    <title>About</title>
+    <link href="<c:url value="/resources/static/css/style.css" />" rel="stylesheet">
 </head>
 <body>
     <ul>
@@ -20,6 +20,5 @@
         <li><a href="${pageContext.request.contextPath}/crossword">Crossword</a></li>
         <li><a href="${pageContext.request.contextPath}/create?column=1&lines=1">Create</a></li>
     </ul>
-    <p>${someAttribute}</p>
 </body>
 </html>
