@@ -11,8 +11,7 @@
 
     <resources mapping="/resources/**" location="/resources/" />
 
-    <beans:bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/" />
         <beans:property name="suffix" value=".jsp" />
     </beans:bean>
@@ -44,10 +43,8 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" />
 
-    <beans:bean id="transactionManager"
-                class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <beans:property name="sessionFactory"
-                        ref="hibernate4AnnotatedSessionFactory" />
+    <beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
 
 

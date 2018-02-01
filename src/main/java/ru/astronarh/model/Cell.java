@@ -1,7 +1,5 @@
 package ru.astronarh.model;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -13,7 +11,6 @@ public class Cell {
     @Column(name = "id", columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="cell_id_seq")
     @SequenceGenerator(name="cell_id_seq", sequenceName="cell_id_seq", allocationSize=1)
-    @NotNull
     private int id;
 
     @Basic

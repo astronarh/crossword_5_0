@@ -103,13 +103,35 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>copy</goal></goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.github.jsimone</groupId>
+                                    <artifactId>webapp-runner</artifactId>
+                                    <version>8.5.27.0</version>
+                                    <destFileName>webapp-runner.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
 
     </build>
     <properties>
         <spring.version>4.2.1.RELEASE</spring.version>
         <security.version>4.0.3.RELEASE</security.version>
-        <jdk.version>1.7</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <hibernate.version>4.3.5.Final</hibernate.version>
         <org.aspectj-version>1.7.4</org.aspectj-version>
     </properties>

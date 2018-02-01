@@ -21,10 +21,6 @@ public class CellDAO {
 
     public List<Cell> getAllCell() {
         Session session = this.sessionFactory.getCurrentSession();
-        //List<Cell> cellList = session.createQuery("from Cell").list();
-
-        //List<Products> list = session.createCriteria(Products.class).list();
-
         return (List<Cell>) session.createCriteria(Cell.class).list();
     }
 
