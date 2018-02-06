@@ -29,21 +29,22 @@
     <br/>
     <br/>
 
-    <form method="get" action="${pageContext.request.contextPath}/create">
-        <jsp:text>Size:</jsp:text>
-        <select name="column">
-            <c:forEach var="horizontal" items="${horizontal}">
-                <option value="${horizontal}">${horizontal}</option>
-            </c:forEach>
-        </select>
-        <select name="lines">
-            <c:forEach var="vertical" items="${vertical}">
-                <option value="${vertical}">${vertical}</option>
-            </c:forEach>
-        </select>
-        <input type="submit" name="button1" value="redraw"/>
-    </form>
-
+    <div class="create" align="center">
+        <form method="get" action="${pageContext.request.contextPath}/create">
+            <jsp:text>Size:</jsp:text>
+            <select name="column">
+                <c:forEach var="horizontal" items="${horizontal}">
+                    <option value="${horizontal}">${horizontal}</option>
+                </c:forEach>
+            </select>
+            <select name="lines">
+                <c:forEach var="vertical" items="${vertical}">
+                    <option value="${vertical}">${vertical}</option>
+                </c:forEach>
+            </select>
+            <input type="submit" name="button1" value="redraw"/>
+        </form>
+    </div>
     <c:if test="${lines != null}">
         <form:form method="post" action="/save" commandName="cells">
             <input type="hidden" name="size" value="${column.size()} ${lines.size()}"/>

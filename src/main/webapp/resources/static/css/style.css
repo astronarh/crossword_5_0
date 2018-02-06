@@ -111,12 +111,14 @@ textarea {
 
 /* Эффект 16: наложение справа */
 .cl-effect-16 a {
+    text-decoration: none;
     color: #6f8686;
     text-shadow: 0 0 1px rgba(111,134,134,0.3);
 }
 
 .cl-effect-16 a::before {
-    color: #fff;
+    text-decoration: none;
+    color: #6f8686;
     content: attr(data-hover);
     position: absolute;
     opacity: 0;
@@ -132,6 +134,7 @@ textarea {
 
 .cl-effect-16 a:hover::before,
 .cl-effect-16 a:focus::before {
+    text-decoration: none;
     -webkit-transform: scale(1) translateX(0px) translateY(0px) rotate(0deg);
     -moz-transform: scale(1) translateX(0px) translateY(0px) rotate(0deg);
     transform: scale(1) translateX(0px) translateY(0px) rotate(0deg);
@@ -139,6 +142,22 @@ textarea {
 }
 
 .color-11 {
-    background: #aab7b7;
+    text-decoration: none;
+    text-align: center;
+}
+
+div.test {
+    position: absolute;
+    width: 500px;
+    height: 100px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+.create {
+    display: inline-block;
     text-align: center;
 }

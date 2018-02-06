@@ -12,6 +12,7 @@
 <head>
     <title>Crossword</title>
     <link href="<c:url value="/resources/static/css/style.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/static/css/tableStyle.css" />" rel="stylesheet">
 </head>
 <body>
     <ul>
@@ -26,7 +27,7 @@
     <br/>
     <br/>
     <c:if test="${crosswordList != null}">
-        <table align="center">
+        <table align="center" class="simple-little-table" cellspacing='0'>
             <tr>
                 <td>ID</td>
                 <td>ROWS</td>

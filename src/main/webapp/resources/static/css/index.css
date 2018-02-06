@@ -1,6 +1,12 @@
 @charset "utf-8";
 /* CSS Document */
-body {margin: 0;padding: 0;font-family: sans-serif;}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-image: url("/resources/static/images.background/background winter_1920x1080.jpg");
+}
+
 ul {
     position: absolute;
     top: 50%;
@@ -18,8 +24,10 @@ ul li a {
     display: block;
     margin: 0 10px;
     padding: 5px 10px;
-    color: #aaa;
+    color: black;
     font-size: 24px;
+    font-weight: 600;
+    text-shadow: white 0 0 2px;
     text-decoration: none;
     text-transform: uppercase;
     transition: 0.5s;
