@@ -18,7 +18,7 @@
         <li><a href="${pageContext.request.contextPath}/about">About</a></li>
         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
         <li><a href="${pageContext.request.contextPath}/crossword">Crossword</a></li>
-        <li><a href="${pageContext.request.contextPath}/create?column=1&lines=1">Create</a></li>
+        <li><a href="${pageContext.request.contextPath}/create">Create</a></li>
     </ul>
     <p>${someAttribute}</p>
 </body>

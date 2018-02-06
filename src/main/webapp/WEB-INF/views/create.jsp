@@ -22,7 +22,7 @@
         <li><a href="${pageContext.request.contextPath}/about">About</a></li>
         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
         <li><a href="${pageContext.request.contextPath}/crossword">Crossword</a></li>
-        <li><a href="${pageContext.request.contextPath}/create?column=1&lines=1">Create</a></li>
+        <li><a href="${pageContext.request.contextPath}/create">Create</a></li>
     </ul>
 
     <br/>
@@ -44,41 +44,44 @@
         <input type="submit" name="button1" value="redraw"/>
     </form>
 
-    <form:form method="post" action="save" commandName="cells">
-        <input type="hidden" name="size" value="${column.size()} ${lines.size()}"/>
-        <%int count = 0;%>
-        <table>
-            <tbody>
-            <c:forEach var="lines" items="${lines}">
-                <tr>
-                    <c:forEach var="column" items="${column}">
-                        <td id="td ${lines} ${column}">
-                            <div id="div ${lines} ${column}" style="width: 50px; height: 50px; background-image: url(resources/static/images/arrows/00.png);" ondblclick="select('${lines} ${column}')">
-                                <input type="text" id="letter ${lines} ${column}" maxlength="1" style="display: none;" onkeyup="changeletter('${lines} ${column}')">
-                                <textarea id="qestion ${lines} ${column}" cols="30" rows="10" style="display: none;" onkeyup="changequestion('${lines} ${column}')"></textarea>
-                                <input type="hidden" id="hiddenletter ${lines} ${column}" name="cells[<%=count%>].letter" value=""/>
-                                <input type="hidden" id="hiddenarrow ${lines} ${column}" name="cells[<%=count%>].arrow" value="0"/>
-                                <input type="hidden" id="hiddenquestion ${lines} ${column}" name="cells[<%=count%>].question" value=""/>
-                                <div id="selectDiv ${lines} ${column}" style="display: none; position: absolute; top: 50%; bottom: 50%; z-index: 101;">
-                                    Select type:
-                                    <br/>
-                                    <select id="select ${lines} ${column}" onChange="changeSelect('${lines} ${column}')">
-                                        <option value="0"></option>
-                                        <option value="1">Буква</option>
-                                        <option value="2">Буква + стрелка</option>
-                                        <option value="3">Вопрос</option>
-                                    </select>
+    <c:if test="${lines != null}">
+        <form:form method="post" action="/save" commandName="cells">
+            <input type="hidden" name="size" value="${column.size()} ${lines.size()}"/>
+            <%int count = 0;%>
+            <table>
+                <tbody>
+                <c:forEach var="lines" items="${lines}">
+                    <tr>
+                        <c:forEach var="column" items="${column}">
+                            <td id="td ${lines} ${column}">
+                                <div id="div ${lines} ${column}" style="width: 50px; height: 50px; background-image: url(resources/static/images/arrows/00.png);" ondblclick="select('${lines} ${column}')">
+                                    <input type="text" id="letter ${lines} ${column}" maxlength="1" style="display: none;" onkeyup="changeletter('${lines} ${column}')">
+                                    <textarea id="qestion ${lines} ${column}" cols="30" rows="10" style="display: none;" onkeyup="changequestion('${lines} ${column}')"></textarea>
+                                    <input type="hidden" id="hiddenletter ${lines} ${column}" name="cells[<%=count%>].letter" value=""/>
+                                    <input type="hidden" id="hiddenarrow ${lines} ${column}" name="cells[<%=count%>].arrow" value="0"/>
+                                    <input type="hidden" id="hiddenquestion ${lines} ${column}" name="cells[<%=count%>].question" value=""/>
+                                    <div id="selectDiv ${lines} ${column}" style="display: none; position: absolute; top: 50%; bottom: 50%; z-index: 101;">
+                                        Select type:
+                                        <br/>
+                                        <select id="select ${lines} ${column}" onChange="changeSelect('${lines} ${column}')">
+                                            <option value="0"></option>
+                                            <option value="1">Буква</option>
+                                            <option value="2">Буква + стрелка</option>
+                                            <option value="3">Вопрос</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <%count++;%>
-                    </c:forEach>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-        <input type="submit" value="Create"/>
-    </form:form>
+                            </td>
+                            <%count++;%>
+                        </c:forEach>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+            <input type="submit" value="Create"/>
+        </form:form>
+    </c:if>
+
 
     <form:form>
         <c:forEach var="lines" items="${lines}">

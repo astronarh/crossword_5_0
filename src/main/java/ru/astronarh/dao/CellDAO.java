@@ -1,8 +1,8 @@
 package ru.astronarh.dao;
 
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.astronarh.model.Cell;
@@ -47,5 +47,15 @@ public class CellDAO {
         if (null != p) {
             session.delete(p);
         }
+    }
+
+    public int lastId() {
+        //return (int) sessionFactory.getCurrentSession().createCriteria(Cell.class).setProjection(Projections.max("id")).uniqueResult();
+        Session session = this.sessionFactory.getCurrentSession();
+        session.persist(new Cell());
+        List<Cell> cellList = getAllCell();
+        int lastId = cellList.get(cellList.size() - 1).getId();
+        deleteCell(lastId);
+        return lastId;
     }
 }

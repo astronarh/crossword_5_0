@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "cell", schema = "public", catalog = "crossword")
+@Table(name = "cell")
 public class Cell {
 
     @Id
@@ -15,7 +15,7 @@ public class Cell {
 
     @Basic
     @Column(name = "letter")
-    private Character letter;
+    private String letter;
 
     @Basic
     @Column(name = "arrow")
@@ -33,11 +33,11 @@ public class Cell {
         this.id = id;
     }
 
-    public Character getLetter() {
+    public String getLetter() {
         return letter;
     }
 
-    public void setLetter(Character letter) {
+    public void setLetter(String letter) {
         this.letter = letter;
     }
 

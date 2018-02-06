@@ -7,5 +7,15 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5433/crossword</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="dtndj0m9cgdgk@ec2-54-217-245-66.eu-west-1.compute.amazonaws.com" uuid="108fa21c-fa64-4ed1-b3ca-19c66be002fa">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-54-217-245-66.eu-west-1.compute.amazonaws.com:5432/dtndj0m9cgdgk</jdbc-url>
+      <driver-properties>
+        <property name="ssl" value="true" />
+        <property name="sslmode" value="require" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>

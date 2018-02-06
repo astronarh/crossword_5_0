@@ -32,11 +32,15 @@ public class CellService {
     @Transactional
     public void updateCell(Cell cell) {
         cellDao.updateCell(cell);
-
     }
 
     @Transactional
     public void deleteCell(int id) {
         cellDao.deleteCell(id);
+    }
+
+    @Transactional
+    public int lastId() {
+        return cellDao.lastId();
     }
 }

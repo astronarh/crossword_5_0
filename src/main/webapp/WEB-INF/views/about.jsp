@@ -18,7 +18,26 @@
         <li><a href="${pageContext.request.contextPath}/about">About</a></li>
         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
         <li><a href="${pageContext.request.contextPath}/crossword">Crossword</a></li>
-        <li><a href="${pageContext.request.contextPath}/create?column=1&lines=1">Create</a></li>
+        <li><a href="${pageContext.request.contextPath}/create">Create</a></li>
     </ul>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <section class="color-11">
+        <nav class="cl-effect-16">
+            <a href="http://vk.com/astronarh" data-hover="VK">VK</a>
+            <a href="#" data-hover="Ссылка 2">Ссылка 2</a>
+            <a href="#" data-hover="Ссылка 3">Ссылка 3</a>
+            <a href="#" data-hover="Ссылка 4">Ссылка 4</a>
+            <a href="#" data-hover="Ссылка 5">Ссылка 5</a>
+        </nav>
+    </section>
 </body>
 </html>

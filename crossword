@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS crossword;
+CREATE TABLE crossword (
+  id SERIAL,
+  rows INT,
+  columns INT,
+  idbegin INT,
+  idend INT
+);
