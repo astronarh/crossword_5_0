@@ -25,7 +25,7 @@ public class CrosswordDAO {
 
     public Crossword getCrossword(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        return session.get(Crossword.class, id);
+        return (Crossword) session.get(Crossword.class, id);
     }
 
     public List<Crossword> getAllCrossword() {
@@ -35,7 +35,7 @@ public class CrosswordDAO {
 
     public void deleteCrossword(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Crossword crossword = session.load(Crossword.class, id);
+        Crossword crossword = (Crossword) session.load(Crossword.class, id);
         if (null != crossword) session.delete(crossword);
     }
 }
