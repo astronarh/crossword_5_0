@@ -58,8 +58,8 @@
     </role>
     <schema id="11" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2018-02-05.17:04:14.485</IntrospectionTimestamp>
-      <IntrospectionStateNumber>2008</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-02-08.11:04:20.530</IntrospectionTimestamp>
+      <IntrospectionStateNumber>3909</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -78,9 +78,9 @@
     <schema id="16" parent="2" name="information_schema">
       <ObjectId>12648</ObjectId>
     </schema>
-    <sequence id="17" parent="11" name="crossword_id_seq">
-      <ObjectId>16538</ObjectId>
-      <StateNumber>2008</StateNumber>
+    <sequence id="17" parent="11" name="users_id_seq">
+      <ObjectId>16544</ObjectId>
+      <StateNumber>3909</StateNumber>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
@@ -94,15 +94,27 @@
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <table id="19" parent="11" name="cell">
+    <sequence id="19" parent="11" name="crossword_id_seq">
+      <ObjectId>16538</ObjectId>
+      <StateNumber>2008</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <table id="20" parent="11" name="cell">
       <ObjectId>16531</ObjectId>
       <StateNumber>2006</StateNumber>
     </table>
-    <table id="20" parent="11" name="crossword">
+    <table id="21" parent="11" name="crossword">
       <ObjectId>16540</ObjectId>
       <StateNumber>2008</StateNumber>
     </table>
-    <column id="21" parent="19" name="id">
+    <table id="22" parent="11" name="users">
+      <ObjectId>16546</ObjectId>
+      <StateNumber>3909</StateNumber>
+    </table>
+    <column id="23" parent="20" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -111,25 +123,25 @@
       <TypeId>23</TypeId>
       <SequenceName>cell_id_seq</SequenceName>
     </column>
-    <column id="22" parent="19" name="letter">
+    <column id="24" parent="20" name="letter">
       <Position>2</Position>
       <DataType>text|0</DataType>
       <StateNumber>2006</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="23" parent="19" name="arrow">
+    <column id="25" parent="20" name="arrow">
       <Position>3</Position>
       <DataType>integer|0</DataType>
       <StateNumber>2006</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="24" parent="19" name="question">
+    <column id="26" parent="20" name="question">
       <Position>4</Position>
       <DataType>text|0</DataType>
       <StateNumber>2006</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="25" parent="20" name="id">
+    <column id="27" parent="21" name="id">
       <Position>1</Position>
       <DataType>integer|0</DataType>
       <NotNull>1</NotNull>
@@ -138,28 +150,57 @@
       <TypeId>23</TypeId>
       <SequenceName>crossword_id_seq</SequenceName>
     </column>
-    <column id="26" parent="20" name="rows">
+    <column id="28" parent="21" name="rows">
       <Position>2</Position>
       <DataType>integer|0</DataType>
       <StateNumber>2008</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="27" parent="20" name="columns">
+    <column id="29" parent="21" name="columns">
       <Position>3</Position>
       <DataType>integer|0</DataType>
       <StateNumber>2008</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="28" parent="20" name="idbegin">
+    <column id="30" parent="21" name="idbegin">
       <Position>4</Position>
       <DataType>integer|0</DataType>
       <StateNumber>2008</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="29" parent="20" name="idend">
+    <column id="31" parent="21" name="idend">
       <Position>5</Position>
       <DataType>integer|0</DataType>
       <StateNumber>2008</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="32" parent="22" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3909</StateNumber>
+      <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+      <SequenceName>users_id_seq</SequenceName>
+    </column>
+    <column id="33" parent="22" name="login">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>3909</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="34" parent="22" name="password">
+      <Position>3</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>3909</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="35" parent="22" name="enabled">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3909</StateNumber>
+      <DefaultExpression>1</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
   </database-model>

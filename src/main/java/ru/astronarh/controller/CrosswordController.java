@@ -1,6 +1,7 @@
 package ru.astronarh.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.astronarh.model.Cell;
 import ru.astronarh.model.Cells;
 import ru.astronarh.model.Crossword;
+import ru.astronarh.model.User;
 import ru.astronarh.service.CellService;
 import ru.astronarh.service.CrosswordService;
 
@@ -38,6 +40,19 @@ public class CrosswordController {
     @RequestMapping("/about")
     public String aboutController() {
         return "about";
+    }
+
+    @RequestMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ModelAndView loginController(@ModelAttribute(value = "user")String user, @ModelAttribute(value = "login")String login) {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("login");
+        System.out.println(user + " " + login);
+        return model;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -96,11 +111,26 @@ public class CrosswordController {
     }
 
     @RequestMapping("/crossword")
-    public ModelAndView crosswordController() {
+    public ModelAndView crosswordController(@RequestParam(required = false) Integer page) {
         ModelAndView model = new ModelAndView();
         model.setViewName("crossword");
         List<Crossword> crosswordList = crosswordService.getAllCrossword();
-        model.addObject("crosswordList", crosswordList);
+        //model.addObject("crosswordList", crosswordList);
+
+        PagedListHolder<Crossword> pagedListHolder = new PagedListHolder<>(crosswordList);
+        pagedListHolder.setPageSize(10);
+        model.addObject("maxPages", pagedListHolder.getPageCount());
+        if(page == null || page < 1 || page > pagedListHolder.getPageCount()) page = 1;
+        model.addObject("page", page);
+        if(page == null || page < 1 || page > pagedListHolder.getPageCount()){
+            pagedListHolder.setPage(0);
+            model.addObject("crosswordList", pagedListHolder.getPageList());
+        }
+        else if(page <= pagedListHolder.getPageCount()) {
+            pagedListHolder.setPage(page-1);
+            model.addObject("crosswordList", pagedListHolder.getPageList());
+        }
+
         return model;
     }
 

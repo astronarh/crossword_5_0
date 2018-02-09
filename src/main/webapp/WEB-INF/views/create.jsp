@@ -14,7 +14,7 @@
     <link href="<c:url value="/resources/static/css/style.css" />" rel="stylesheet">
     <script src="<c:url value="/resources/static/js/script.js" />"></script>
 </head>
-<body>
+<body background="/resources/static/images.background/blue-crossline.png">
     <div id="TB_overlay"></div>
 
     <ul>

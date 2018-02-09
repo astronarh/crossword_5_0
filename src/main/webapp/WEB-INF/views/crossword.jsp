@@ -14,7 +14,7 @@
     <link href="<c:url value="/resources/static/css/style.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/static/css/tableStyle.css" />" rel="stylesheet">
 </head>
-<body>
+<body background="/resources/static/images.background/crosswordbackground.jpg" style="background-repeat: repeat-x; background-color: #d2ff9a">
     <ul>
         <li><a href="${pageContext.request.contextPath}/">Home</a></li>
         <li><a href="${pageContext.request.contextPath}/about">About</a></li>
@@ -26,17 +26,28 @@
     <br/>
     <br/>
     <br/>
+
     <c:if test="${crosswordList != null}">
-        <table align="center" class="simple-little-table" cellspacing='0'>
-            <tr>
-                <td>ID</td>
-                <td>ROWS</td>
-                <td>COLUMNS</td>
-                <td>IDBEGIN</td>
-                <td>IDEND</td>
-                <td></td>
-                <td></td>
-            </tr>
+
+        <c:url value="crossword" var="prev">
+            <c:param name="page" value="${page-1}"/>
+        </c:url>
+        <c:if test="${page > 1}">
+            <center><a href="<c:out value="${prev}" /> ">Prev</a></center>>
+        </c:if>
+
+        <table align="center" class="bordered" cellspacing='0' width="600">
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>rows</td>
+                    <td>columns</td>
+                    <td>idbegin</td>
+                    <td>idend</td>
+                    <td height="27" width="27"></td>
+                    <td height="27" width="27"></td>
+                </tr>
+            </thead>
             <c:forEach var="crosswordList" items="${crosswordList}">
                 <tr>
                     <td>${crosswordList.id}</td>
@@ -44,11 +55,20 @@
                     <td>${crosswordList.columns}</td>
                     <td>${crosswordList.idBegin}</td>
                     <td>${crosswordList.idEnd}</td>
-                    <td><a href="crossword/${crosswordList.id}">SELECT</a> </td>
-                    <td><a style="color: red" href="crosswordDelete/${crosswordList.id}">DELETE</a> </td>
+                    <td><a href="crossword/${crosswordList.id}" title="select"><img width="27" height="27" src="/resources/static/images.rest/select.png"/></a> </td>
+                    <td><a href="crosswordDelete/${crosswordList.id}" title="delete"><img width="27" height="27" src="/resources/static/images.rest/delete.png"/></a> </td>
                 </tr>
             </c:forEach>
         </table>
+
+        <br/>
+        <c:url value="crossword" var="next">
+            <c:param name="page" value="${page + 1}"/>
+        </c:url>
+        <c:if test="${page + 1 <= maxPages}">
+            <center><a href='<c:out value="${next}" />'>Next</a></center>>
+        </c:if>
+
     </c:if>
     <c:if test="${crosswordList == null}">
         <table align="center">
