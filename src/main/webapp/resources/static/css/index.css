@@ -70,3 +70,25 @@ ul li a:hover::before {
         z-index: -1;
     }
 }
+
+#login-div {
+    position: fixed;
+    top:0;
+    right:0;
+}
+#logout-div {
+    position: fixed;
+    top:0;
+    right:0;
+}
+#logout-button {
+    background-color: transparent;
+    border: 0;
+    color: blue;
+    cursor: pointer;
+    display: inline;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    text-decoration: underline;
+}

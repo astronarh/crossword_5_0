@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: ShkerdinVA
@@ -16,10 +17,24 @@
     <ul>
         <li><a href="${pageContext.request.contextPath}/">Home</a></li>
         <li><a href="${pageContext.request.contextPath}/about">About</a></li>
-        <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
         <li><a href="${pageContext.request.contextPath}/crossword">Crossword</a></li>
-        <li><a href="${pageContext.request.contextPath}/create">Create</a></li>
+        <security:authorize access="hasRole('ROLE_ADMIN')">
+            <li><a href="${pageContext.request.contextPath}/create">Create</a></li>
+        </security:authorize>
     </ul>
-    <p>${someAttribute}</p>
+    <security:authorize access="isAnonymous()">
+        <div id="login-div">
+            <a href="${pageContext.request.contextPath}/login">login</a>
+        </div>
+    </security:authorize>
+    <security:authorize access="isAuthenticated()">
+        <div id="logout-div">
+            <form action="/logout" method="post">
+                <a href="${pageContext.request.contextPath}/aboutUser"><security:authentication property="principal.username" /></a>
+                <input id="logout-button" type="submit" value="Logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
+        </div>
+    </security:authorize>
 </body>
 </html>

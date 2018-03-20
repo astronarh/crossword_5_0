@@ -64,16 +64,6 @@ ul li a:hover::before {
     }
 }
 
-table {
-    border-collapse: collapse; /* Отображать только одинарные линии */
-}
-th {
-    border: 1px solid black; /* Граница вокруг ячеек */
-}
-td {
-    border: 1px solid black; /* Граница вокруг ячеек */
-}
-
 #TB_overlay {
     background-color: #000; /* Чёрный фон */
     height: 100%; /* Высота максимальна */
@@ -84,23 +74,6 @@ td {
     width: 100%; /* Ширина максимальна */
     z-index: 100; /* Заведомо быть НАД другими элементами */
     display: none;
-}
-
-input[type="text"]{
-    border: none;
-    background: transparent;
-    text-align: center;
-    font-size: 24px;
-    width: 50px;
-    height: 50px;
-}
-
-textarea {
-    border: none;
-    resize: none;
-    width: 50px;
-    height: 50px;
-    font-size: 10px;
 }
 
 .question{
@@ -182,4 +155,24 @@ div.test {
     outline: none;
     padding: 0;
     text-decoration: underline;
+}
+#registration-box {
+    position: fixed; /* or absolute */
+    top: 40%;
+    left: 50%;
+    width: 200px;
+    height:100px;
+    margin: -100px 0 0 -100px;
+}
+
+.msg-box {
+    color: red;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 20px;
+    background-color: #FFF9AE;
+
+    display:block;
+    opacity:1
 }

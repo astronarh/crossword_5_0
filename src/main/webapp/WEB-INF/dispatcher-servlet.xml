@@ -30,6 +30,8 @@
             <beans:list>
                 <beans:value>ru.astronarh.model.Cell</beans:value>
                 <beans:value>ru.astronarh.model.Crossword</beans:value>
+                <beans:value>ru.astronarh.model.User</beans:value>
+                <beans:value>ru.astronarh.model.UserRoles</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">

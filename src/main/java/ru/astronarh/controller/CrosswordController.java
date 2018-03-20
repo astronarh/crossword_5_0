@@ -2,17 +2,25 @@ package ru.astronarh.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
-import ru.astronarh.model.Cell;
-import ru.astronarh.model.Cells;
-import ru.astronarh.model.Crossword;
-import ru.astronarh.model.User;
+import ru.astronarh.dto.UserDTO;
+import ru.astronarh.model.*;
 import ru.astronarh.service.CellService;
 import ru.astronarh.service.CrosswordService;
+import ru.astronarh.service.UserRoleService;
+import ru.astronarh.service.UserService;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +34,12 @@ public class CrosswordController {
 
     @Autowired
     CrosswordService crosswordService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    UserRoleService userRoleService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -46,6 +60,11 @@ public class CrosswordController {
     public String loginPage() {
         return "login";
     }
+
+    /*@RequestMapping("/registration")
+    public String registrationPage() {
+        return "registration";
+    }*/
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView loginController(@ModelAttribute(value = "user")String user, @ModelAttribute(value = "login")String login) {
@@ -142,5 +161,69 @@ public class CrosswordController {
         for (int i = crossword.getIdBegin(); i <= crossword.getIdEnd(); i++) cellService.deleteCell(i);
         crosswordService.deleteCrossword(id);
         return model;
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String showRegistrationForm(WebRequest request, Model model) {
+        UserDTO userDTO = new UserDTO();
+        model.addAttribute("user", userDTO);
+        return "registration";
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDTO userDTO) {
+        ModelAndView model = new ModelAndView();
+        List<String> errorList = Validators.emptyTest(userDTO);
+        if (errorList.size() == 0) {
+            List<User> userList = userService.getAllUsers();
+            userList.forEach(user -> {
+                if (user.getLogin().equals(userDTO.getLogin())) errorList.add("Username already exist");
+                if (user.getEmail().equals(userDTO.getEmail())) errorList.add("Email already exist");
+            });
+            if (errorList.size() == 0) {
+                User user = new User();
+                user.setLogin(userDTO.getLogin());
+                user.setEmail(userDTO.getEmail());
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                String hashedPassword = passwordEncoder.encode(userDTO.getPassword());
+                user.setPassword(hashedPassword);
+                user.setEnabled(1);
+                userService.addUser(user);
+                UserRoles userRoles = new UserRoles();
+                userRoles.setLogin(userDTO.getLogin());
+                userRoles.setRole("ROLE_USER");
+                userRoleService.addUserRole(userRoles);
+                model.setViewName("/login");
+                model.addObject("message", "The account was created successfully.");
+            } else {
+                model.addObject("user", userDTO);
+                model.addObject("message", errorList);
+                model.setViewName("/registration");
+            }
+        } else {
+            model.addObject("user", userDTO);
+            model.addObject("message", errorList);
+            model.setViewName("/registration");
+        }
+        return model;
+    }
+
+
+    //for 403 access denied page
+    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    public ModelAndView accesssDenied() {
+
+        ModelAndView model = new ModelAndView();
+
+        //check if user is login
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            UserDetails userDetail = (UserDetails) auth.getPrincipal();
+            model.addObject("login", userDetail.getUsername());
+        }
+
+        model.setViewName("403");
+        return model;
+
     }
 }
